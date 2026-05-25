@@ -3,12 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shrivats Studio — Architecture & Interior Design</title>
+<title>Shreevats Design Studio </title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
 
 <style>
+  @font-face {
+    font-family: 'Samarkan'; /* Give it a name to use later */
+    src: url('/samarkan/SAMAN___.TTF') format('truetype');
+    /* Use format('woff2') for .woff2 files or format('opentype') for .otf */
+}
+
   :root {
     --teal-deep:    #1a4a4e;
     --teal-mid:     #2a6b72;
@@ -90,7 +96,7 @@
 
   .nav-logo {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-style: italic;
     color: var(--gold);
     letter-spacing: 0.15em;
@@ -100,7 +106,7 @@
   .nav-logo span {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.52rem;
+    font-size: 0.8rem;
     font-style: normal;
     letter-spacing: 0.35em;
     color: var(--warm-gray-lt);
@@ -150,6 +156,7 @@
   #hero {
     position: relative;
     min-height: 100vh;
+    top: 0;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
     background: var(--charcoal);
@@ -158,6 +165,7 @@
   .hero-inner {
     position: relative; z-index: 2;
     text-align: center;
+    margin-top: 20vh;
     padding: 0 2rem;
   }
 
@@ -936,6 +944,21 @@
     padding: 0 1rem;
     opacity: 0.6;
   }
+.samarkan{
+  font-family: "samarkan";
+}
+.web-developer {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  letter-spacing: 0.2em;
+  color: var(--warm-gray);
+  opacity: 0.5;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 0.5px solid rgba(201, 169, 110, 0.08);
+}
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -1046,8 +1069,8 @@
 <!-- ══════════ NAVIGATION ══════════ -->
 <nav>
   <a href="#" class="nav-logo">
-    श्रिवत्स
-    <span>Architecture &amp; Interior Design</span>
+    <span class="samarkan" style="font-family: samarkan;">Shreevats</span>
+    <span>Design Studio</span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">Studio</a></li>
@@ -1114,10 +1137,10 @@
   </div>
 
   <div class="hero-inner">
-    <p class="hero-eyebrow">Since 2004 &ensp;·&ensp; Pune, India &ensp;·&ensp; Architecture &amp; Interiors</p>
+    <p class="hero-eyebrow">Since 2008 &ensp;·&ensp; Nashik, India &ensp;·&ensp; Architecture &amp; Interiors</p>
     <h1 class="hero-title">
-      श्रिवत्स
-      <em>Architecture Studio</em>
+      <span class="samarkan">Shreevats</span>
+      <em>Design Studio</em>
     </h1>
     <p class="hero-sub">Where sacred geometry meets living space</p>
     <p class="hero-mantra">॥ कल्पयतु, विश्वालं कुरु, साधयतु ॥</p>
@@ -1210,11 +1233,11 @@
       <div>
         <p class="eyebrow reveal">The Studio</p>
         <h2 class="section-title reveal reveal-delay-1">
-          Built on the <em>geometry of<br>ancient India</em>
+          <span class="samarkan">Built on the</span> <em>geometry of<br>ancient India</em>
         </h2>
         <div class="gold-rule reveal reveal-delay-2"></div>
         <p class="body-text reveal reveal-delay-2">
-          Shrivats Studio was born from a singular belief — that the most enduring architecture
+          Shreevats Studio was born from a singular belief — that the most enduring architecture
           speaks two languages simultaneously: the timeless grammar of sacred Indian geometry,
           and the refined vocabulary of contemporary luxury.
         </p>
@@ -1245,7 +1268,7 @@
       <div>
         <p class="eyebrow reveal">Selected Works</p>
         <h2 class="section-title reveal reveal-delay-1">
-          The <em>Portfolio</em>
+          The <span class="samarkan"><em>Portfolio</em></span>
         </h2>
       </div>
       <a href="#" style="display:inline-flex;align-items:center;gap:1rem;text-decoration:none;color:var(--warm-gray-lt);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;transition:color 0.3s;align-self:flex-end;padding-bottom:0.5rem">
@@ -1397,7 +1420,7 @@
       <div>
         <p class="eyebrow reveal">Our Belief</p>
         <h2 class="section-title reveal reveal-delay-1">
-          The <em>Philosophy</em><br>of Space
+          The <span class="samarkan"><em>Philosophy</em></span><br>of Space
         </h2>
         <div class="gold-rule reveal reveal-delay-2"></div>
         <blockquote class="philosophy-quote reveal reveal-delay-2">
@@ -1447,7 +1470,7 @@
   <div class="section-pad-sm">
     <p class="eyebrow reveal">Material Palette</p>
     <h2 class="section-title reveal reveal-delay-1">
-      The <em>Elemental</em><br>Vocabulary
+      The <span class="samarkan"><em>Elemental</em></span><br>Vocabulary
     </h2>
     <p class="body-text reveal reveal-delay-2" style="max-width:500px">
       We work with materials that carry geological memory — stones quarried from the same earth
@@ -1501,7 +1524,7 @@
   <div class="section-pad">
     <p class="eyebrow reveal">The Method</p>
     <h2 class="section-title reveal reveal-delay-1">
-      Five <em>Stages</em><br>of Creation
+      Five <span class="samarkan"><em>Stages</em></span><br>of Creation
     </h2>
 
     <div class="process-steps">
@@ -1543,7 +1566,7 @@
   <div class="section-pad">
     <p class="eyebrow reveal">Voices</p>
     <h2 class="section-title reveal reveal-delay-1">
-      What <em>Clients</em> Say
+      What <span class="samarkan"><em>Clients</em></span> Say
     </h2>
 
     <div class="testimonials-grid">
@@ -1602,7 +1625,7 @@
       <div>
         <p class="eyebrow reveal">Begin</p>
         <h2 class="section-title reveal reveal-delay-1">
-          Commission<br><em>a Space</em>
+          <span class="samarkan">Commission</span><br><em>a Space</em>
         </h2>
         <p class="body-text reveal reveal-delay-2" style="max-width:400px">
           We take a limited number of commissions each year. Tell us about your vision —
@@ -1648,12 +1671,12 @@
 
         <div class="contact-detail">
           <p class="contact-detail-label">Studio Address</p>
-          <p class="contact-detail-value">12, Lane of Craftsmen, Model Colony<br>Pune, Maharashtra — 411 016</p>
+          <p class="contact-detail-value">College Road, Nashik — 422 005 Maharashtra, India</p>
         </div>
 
         <div class="contact-detail">
           <p class="contact-detail-label">Email</p>
-          <p class="contact-detail-value">commissions@shrivatsstudio.in</p>
+          <p class="contact-detail-value">shreevats.arch06@gmail.com</p>
         </div>
 
         <div class="contact-detail">
@@ -1663,7 +1686,7 @@
 
         <div class="contact-detail">
           <p class="contact-detail-label">Project Inquiries</p>
-          <p class="contact-detail-value">+91 20 2553 4400</p>
+          <p class="contact-detail-value">+91 08482868275</p>
         </div>
 
         <!-- Small geo ornament -->
@@ -1688,14 +1711,17 @@
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">श्रिवत्स</div>
+    <div class="footer-logo">Shreevats</div>
     <div class="footer-mantra">
       ॥ कल्पयतु, विश्वालं कुरु, साधयतु ॥
     </div>
     <div class="footer-copy">
-      © 2024 Shrivats Studio<br>
+      © 2024 Shreevats Studio<br>
       Architecture &amp; Interior Design, Pune
     </div>
+  </div>
+  <div class="web-developer">
+    Designed &amp; Built by Siddhant Jadhav
   </div>
 </footer>
 

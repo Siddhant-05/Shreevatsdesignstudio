@@ -83,6 +83,7 @@ body {
   position: fixed;
   bottom: 0;
   right: 0%;
+  /* display: none; */
   /* transform: translateX(-50%); */
   background: #cc0000;
   color: var(--bg-white);
@@ -903,8 +904,24 @@ section {
   z-index: 1;
 }
 .phil-orn {
-  width: 72px;
-  margin: 0 auto 3rem;
+  width: 122px;
+  /* border: 1px solid black; */
+  margin: 0 auto;
+}
+.phil-orn img{
+  width: 122px;
+  margin-bottom: 1em;
+}
+.phil-title-top{
+  font-size: var(--fs-xs);
+  letter-spacing: 0.45em;
+  color: var(--teal);
+  text-transform: uppercase;
+  width: fit-content;
+  margin: auto;
+  /* border: 1px solid black; */
+  margin-bottom: 1.25rem;
+
 }
 .phil-title {
   font-family: "Cinzel", serif;
