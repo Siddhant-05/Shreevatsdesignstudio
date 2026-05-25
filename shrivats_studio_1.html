@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shrivats Studio — Architecture & Interior Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --teal-deep:    #1a4a4e;
+    --teal-mid:     #2a6b72;
+    --teal-soft:    #3d8a8f;
+    --teal-muted:   #4e9da3;
+    --sand:         #d4b896;
+    --sand-light:   #e8d5be;
+    --sand-pale:    #f0e4d0;
+    --gold:         #c9a96e;
+    --gold-bright:  #dbbe8a;
+    --ivory:        #f5ede0;
+    --charcoal:     #1a1814;
+    --charcoal-mid: #2c2820;
+    --charcoal-soft:#3f3a30;
+    --warm-gray:    #7a7060;
+    --warm-gray-lt: #a09585;
+    --accent-geo:   rgba(201,169,110,0.12);
+
+    --font-display: 'IM Fell English', 'Cormorant Garamond', Georgia, serif;
+    --font-head:    'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Josefin Sans', 'Trebuchet MS', sans-serif;
+
+    --spacing-xl: 9rem;
+    --spacing-lg: 5rem;
+    --spacing-md: 2.5rem;
+    --spacing-sm: 1.25rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    background: var(--charcoal);
+    color: var(--sand-light);
+    font-family: var(--font-body);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection { background: var(--teal-mid); color: var(--ivory); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--charcoal); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  /* ── SACRED GEOMETRY BACKGROUND ── */
+  .geo-bg {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.07;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    mix-blend-mode: normal;
+    background: linear-gradient(to bottom, rgba(26,24,20,0.95) 0%, transparent 100%);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    font-style: normal;
+    letter-spacing: 0.35em;
+    color: var(--warm-gray-lt);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; gap: 3rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sand-light);
+    text-decoration: none;
+    transition: color 0.4s;
+    opacity: 0.7;
+  }
+
+  .nav-links a:hover { color: var(--gold); opacity: 1; }
+
+  .nav-cta {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid var(--gold);
+    padding: 0.75rem 1.6rem;
+    text-decoration: none;
+    transition: all 0.4s;
+    opacity: 0.85;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--charcoal);
+    opacity: 1;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    font-weight: 100;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--teal-muted);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 10vw, 9rem);
+    font-weight: 400;
+    line-height: 0.9;
+    color: var(--gold-bright);
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--sand-pale);
+    display: block;
+    font-size: 0.65em;
+    letter-spacing: 0.02em;
+    margin-top: 0.15em;
+  }
+
+  .hero-sub {
+    font-family: var(--font-head);
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-style: italic;
+    color: var(--warm-gray-lt);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.4s 0.8s forwards;
+  }
+
+  .hero-mantra {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-soft);
+    margin: 3rem 0 4rem;
+    opacity: 0;
+    animation: fadeUp 1.2s 1.1s forwards;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeIn 1.5s 1.4s forwards;
+  }
+
+  .hero-scroll {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    opacity: 0;
+    animation: fadeIn 1.2s 1.8s forwards;
+  }
+
+  /* Hero sacred geometry */
+  .hero-geo {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.3;
+    animation: slowSpin 90s linear infinite;
+  }
+
+  .hero-geo-2 {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.09;
+    animation: slowSpin 120s linear infinite reverse;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-pad {
+    padding: var(--spacing-xl) 8rem;
+  }
+
+  .section-pad-sm {
+    padding: var(--spacing-lg) 8rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    font-weight: 100;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--gold-bright);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--sand-pale);
+  }
+
+  .body-text {
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.85;
+    color: var(--warm-gray-lt);
+    font-weight: 300;
+  }
+
+  .gold-rule {
+    width: 60px;
+    height: 0.5px;
+    background: var(--gold);
+    margin: 2.5rem 0;
+    opacity: 0.6;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--charcoal-mid);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .about-image-wrap {
+    position: relative;
+  }
+
+  .about-image-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--teal-deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-image-placeholder::after {
+    content: 'शिल्पशास्त्र';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: rgba(201,169,110,0.15);
+    font-style: italic;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .stat-box {
+    background: var(--charcoal-soft);
+    padding: 2rem;
+    border: 0.5px solid rgba(201,169,110,0.12);
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-top: 0.5rem;
+  }
+
+  /* ── PROJECTS ── */
+  #projects {
+    background: var(--charcoal);
+  }
+
+  .projects-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 2px;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .project-card:nth-child(1) { grid-column: 1 / 8; grid-row: 1; }
+  .project-card:nth-child(2) { grid-column: 8 / 13; grid-row: 1; }
+  .project-card:nth-child(3) { grid-column: 1 / 5; grid-row: 2; }
+  .project-card:nth-child(4) { grid-column: 5 / 9; grid-row: 2; }
+  .project-card:nth-child(5) { grid-column: 9 / 13; grid-row: 2; }
+
+  .project-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--teal-deep);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:nth-child(1) .project-image { aspect-ratio: 16/9; }
+
+  .project-image-inner {
+    position: absolute; inset: 0;
+    background: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Project color variations */
+  .project-card:nth-child(2) .project-image-inner { background: var(--charcoal-soft); }
+  .project-card:nth-child(3) .project-image-inner { background: #2a3a35; }
+  .project-card:nth-child(4) .project-image-inner { background: var(--teal-mid); }
+  .project-card:nth-child(5) .project-image-inner { background: var(--charcoal-mid); }
+
+  .project-image-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,169,110,0.03) 40px,
+      rgba(201,169,110,0.03) 41px
+    );
+  }
+
+  .project-geo-label {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: rgba(201,169,110,0.08);
+    font-style: italic;
+  }
+
+  .project-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,24,20,0.92) 0%, transparent 60%);
+    padding: 1.5rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-card:hover .project-image-inner { transform: scale(1.04); }
+
+  .project-info { position: relative; z-index: 1; }
+
+  .project-type {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal-soft);
+    margin-bottom: 0.4rem;
+  }
+
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--sand-pale);
+    font-style: italic;
+    line-height: 1.1;
+  }
+
+  .project-meta {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray-lt);
+    margin-top: 0.3rem;
+  }
+
+  /* Project base info (always visible) */
+  .project-base {
+    padding: 1.2rem 0 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .project-index {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--warm-gray);
+  }
+
+  .project-title-base {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sand-light);
+  }
+
+  /* ── PHILOSOPHY ── */
+  #philosophy {
+    background: var(--teal-deep);
+    position: relative;
+  }
+
+  .philosophy-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: start;
+  }
+
+  .philosophy-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.8rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold-bright);
+    line-height: 1.35;
+    padding-left: 2rem;
+    border-left: 0.5px solid var(--gold);
+  }
+
+  .philosophy-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .pillar {
+    border-top: 0.5px solid rgba(201,169,110,0.25);
+    padding-top: 1.5rem;
+  }
+
+  .pillar-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .pillar-desc {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.1em;
+    color: var(--sand-light);
+    line-height: 1.8;
+    opacity: 0.75;
+  }
+
+  /* ── MATERIALS ── */
+  #materials {
+    background: var(--charcoal-mid);
+  }
+
+  .materials-strip {
+    display: flex;
+    height: 350px;
+    margin-top: 4rem;
+  }
+
+  .material-swatch {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .material-swatch:hover { flex: 2.5; }
+
+  .swatch-bg {
+    position: absolute; inset: 0;
+    transition: transform 0.6s;
+  }
+
+  .swatch-1 { background: linear-gradient(160deg, #3d6b5a 0%, #1a3830 100%); }
+  .swatch-2 { background: linear-gradient(160deg, #5c4a32 0%, #2e2218 100%); }
+  .swatch-3 { background: linear-gradient(160deg, #1a4a4e 0%, #0d2426 100%); }
+  .swatch-4 { background: linear-gradient(160deg, #4a3a28 0%, #1e160d 100%); }
+  .swatch-5 { background: linear-gradient(160deg, #2a3848 0%, #131c25 100%); }
+
+  .swatch-label {
+    position: absolute;
+    bottom: 2rem; left: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s 0.1s;
+  }
+
+  .material-swatch:hover .swatch-label { opacity: 1; }
+
+  .swatch-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold-bright);
+    display: block;
+  }
+
+  .swatch-origin {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-soft);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* ── PROCESS ── */
+  #process {
+    background: var(--charcoal);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 5rem;
+    border: 0.5px solid rgba(201,169,110,0.1);
+  }
+
+  .process-step {
+    padding: 3rem 2.5rem;
+    border-right: 0.5px solid rgba(201,169,110,0.1);
+    position: relative;
+    transition: background 0.4s;
+  }
+
+  .process-step:last-child { border-right: none; }
+  .process-step:hover { background: rgba(201,169,110,0.04); }
+
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: rgba(201,169,110,0.1);
+    line-height: 1;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .step-desc {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.08em;
+    line-height: 1.9;
+    color: var(--warm-gray-lt);
+    opacity: 0.75;
+  }
+
+  .step-connector {
+    position: absolute;
+    top: 50%;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    border: 0.5px solid var(--gold);
+    transform: rotate(45deg) translateY(-50%);
+    background: var(--charcoal);
+    opacity: 0.4;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials {
+    background: var(--charcoal-mid);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .testimonial {
+    background: var(--charcoal-soft);
+    padding: 3rem 2.5rem;
+    border: 0.5px solid rgba(201,169,110,0.08);
+    position: relative;
+    transition: border-color 0.4s;
+  }
+
+  .testimonial:hover {
+    border-color: rgba(201,169,110,0.25);
+  }
+
+  .testimonial::before {
+    content: '\201C';
+    position: absolute;
+    top: 1.5rem; left: 2rem;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--teal-mid);
+    line-height: 1;
+    opacity: 0.3;
+  }
+
+  .testimonial-text {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--sand-light);
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    opacity: 0.85;
+  }
+
+  .testimonial-author {
+    font-family: var(--font-body);
+    font-size: 0.56rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .testimonial-role {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray);
+    margin-top: 0.3rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--teal-deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 10rem;
+    align-items: start;
+  }
+
+  .contact-form {
+    margin-top: 3rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-field {
+    margin-bottom: 2rem;
+  }
+
+  .form-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.54rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal-soft);
+    margin-bottom: 0.6rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background: rgba(26,24,20,0.4);
+    border: none;
+    border-bottom: 0.5px solid rgba(201,169,110,0.3);
+    padding: 0.9rem 0;
+    color: var(--sand-light);
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-style: italic;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-textarea {
+    resize: none;
+    height: 80px;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: rgba(160,149,133,0.4);
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: transparent;
+    border: 0.5px solid var(--gold);
+    padding: 1.2rem 3rem;
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    margin-top: 1rem;
+  }
+
+  .btn-submit:hover {
+    background: var(--gold);
+    color: var(--charcoal);
+  }
+
+  .btn-submit .arrow {
+    width: 20px;
+    height: 0.5px;
+    background: currentColor;
+    position: relative;
+    transition: width 0.3s;
+  }
+
+  .btn-submit:hover .arrow { width: 30px; }
+
+  .contact-info h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    font-weight: 400;
+  }
+
+  .contact-detail {
+    margin-bottom: 2.5rem;
+    border-top: 0.5px solid rgba(201,169,110,0.15);
+    padding-top: 1.5rem;
+  }
+
+  .contact-detail-label {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-detail-value {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--sand-light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    padding: 4rem 8rem;
+    border-top: 0.5px solid rgba(201,169,110,0.1);
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-mantra {
+    font-family: var(--font-head);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--warm-gray);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray);
+    opacity: 0.4;
+    text-align: right;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .geo-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.2), rgba(201,169,110,0.5), rgba(201,169,110,0.2), transparent);
+    position: relative;
+  }
+
+  .geo-divider::after {
+    content: '◆';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold);
+    font-size: 0.6rem;
+    background: var(--charcoal);
+    padding: 0 1rem;
+    opacity: 0.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+  .reveal-delay-4 { transition-delay: 0.5s; }
+
+  /* ── HORIZONTAL SCROLL HINT ── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 0.5px solid rgba(201,169,110,0.08);
+    border-bottom: 0.5px solid rgba(201,169,110,0.08);
+    padding: 1.5rem 0;
+    background: var(--charcoal-soft);
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    opacity: 0.5;
+  }
+
+  .marquee-dot {
+    color: var(--gold);
+    opacity: 0.4;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── CURSOR DETAIL ── */
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+
+  .cursor-ring {
+    width: 28px; height: 28px;
+    border: 0.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), width 0.3s, height 0.3s;
+    opacity: 0.4;
+  }
+
+  .cursor-ring.hovering {
+    width: 48px;
+    height: 48px;
+    border-color: var(--teal-soft);
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    श्रिवत्स
+    <span>Architecture &amp; Interior Design</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Studio</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#philosophy">Vision</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Begin a Project</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+
+  <!-- Sacred geometry background layers -->
+  <div class="hero-geo">
+    <svg width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+        <!-- Endless knot / Shrivats sacred geometry -->
+        <rect x="350" y="350" width="200" height="200" transform="rotate(0 450 450)"/>
+        <rect x="350" y="350" width="200" height="200" transform="rotate(45 450 450)"/>
+        <rect x="320" y="320" width="260" height="260" transform="rotate(0 450 450)"/>
+        <rect x="320" y="320" width="260" height="260" transform="rotate(45 450 450)"/>
+        <rect x="290" y="290" width="320" height="320" transform="rotate(0 450 450)"/>
+        <rect x="290" y="290" width="320" height="320" transform="rotate(45 450 450)"/>
+        <!-- Outer rings -->
+        <circle cx="450" cy="450" r="280"/>
+        <circle cx="450" cy="450" r="250"/>
+        <circle cx="450" cy="450" r="350"/>
+        <!-- Radial lines -->
+        <line x1="450" y1="100" x2="450" y2="800"/>
+        <line x1="100" y1="450" x2="800" y2="450"/>
+        <line x1="252" y1="252" x2="648" y2="648"/>
+        <line x1="648" y1="252" x2="252" y2="648"/>
+        <!-- Diagonal crosses extended -->
+        <line x1="200" y1="150" x2="700" y2="750"/>
+        <line x1="700" y1="150" x2="200" y2="750"/>
+        <!-- Hexagonal overlay -->
+        <polygon points="450,200 623,300 623,500 450,600 277,500 277,300"/>
+        <polygon points="450,250 598,325 598,475 450,550 302,475 302,325"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-geo-2">
+    <svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+        <circle cx="600" cy="600" r="500"/>
+        <circle cx="600" cy="600" r="450"/>
+        <circle cx="600" cy="600" r="400"/>
+        <circle cx="600" cy="600" r="350"/>
+        <circle cx="600" cy="600" r="300"/>
+        <circle cx="600" cy="600" r="200"/>
+        <circle cx="600" cy="600" r="100"/>
+        <!-- 12-point mandala -->
+        <g transform="rotate(0 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+        <g transform="rotate(30 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+        <g transform="rotate(60 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+        <g transform="rotate(90 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+        <g transform="rotate(120 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+        <g transform="rotate(150 600 600)"><line x1="600" y1="100" x2="600" y2="1100"/></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Since 2004 &ensp;·&ensp; Pune, India &ensp;·&ensp; Architecture &amp; Interiors</p>
+    <h1 class="hero-title">
+      श्रिवत्स
+      <em>Architecture Studio</em>
+    </h1>
+    <p class="hero-sub">Where sacred geometry meets living space</p>
+    <p class="hero-mantra">॥ कल्पयतु, विश्वालं कुरु, साधयतु ॥</p>
+    <div class="hero-divider"></div>
+    <p class="hero-scroll">Scroll to explore ↓</p>
+  </div>
+</section>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Sacred Geometry</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Temple Minimalism</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Mughal Craftsmanship</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Contemporary Brutalism</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Stepwell Geometry</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Luxury Interiors</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Jaipur Heritage</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Maratha Aesthetics</span>
+    <span class="marquee-dot">◆</span>
+    <!-- Repeat -->
+    <span class="marquee-item">Sacred Geometry</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Temple Minimalism</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Mughal Craftsmanship</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Contemporary Brutalism</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Stepwell Geometry</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Luxury Interiors</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Jaipur Heritage</span>
+    <span class="marquee-dot">◆</span>
+    <span class="marquee-item">Maratha Aesthetics</span>
+    <span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="section-pad">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <div class="about-image-wrap">
+          <div class="about-image-placeholder">
+            <!-- Geometric overlay on placeholder -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+                <rect x="40" y="60" width="220" height="280" rx="0"/>
+                <rect x="60" y="80" width="180" height="240" rx="0"/>
+                <line x1="40" y1="60" x2="260" y2="340"/>
+                <line x1="260" y1="60" x2="40" y2="340"/>
+                <circle cx="150" cy="200" r="60"/>
+                <circle cx="150" cy="200" r="40"/>
+                <circle cx="150" cy="200" r="20"/>
+              </g>
+            </svg>
+          </div>
+          <div class="about-stats">
+            <div class="stat-box reveal reveal-delay-1">
+              <div class="stat-number">20+</div>
+              <div class="stat-label">Years of Practice</div>
+            </div>
+            <div class="stat-box reveal reveal-delay-2">
+              <div class="stat-number">180</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-box reveal reveal-delay-3">
+              <div class="stat-number">12</div>
+              <div class="stat-label">Awards &amp; Citations</div>
+            </div>
+            <div class="stat-box reveal reveal-delay-4">
+              <div class="stat-number">6</div>
+              <div class="stat-label">Cities Across India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow reveal">The Studio</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          Built on the <em>geometry of<br>ancient India</em>
+        </h2>
+        <div class="gold-rule reveal reveal-delay-2"></div>
+        <p class="body-text reveal reveal-delay-2">
+          Shrivats Studio was born from a singular belief — that the most enduring architecture
+          speaks two languages simultaneously: the timeless grammar of sacred Indian geometry,
+          and the refined vocabulary of contemporary luxury.
+        </p>
+        <p class="body-text reveal reveal-delay-3" style="margin-top:1.5rem">
+          We draw from the step-wells of Rajasthan, the carved stone screens of Mughal courtyards,
+          the proportional systems of Vastu Shastra, and the brutal honesty of raw material —
+          weaving them into spaces that feel both ancient and entirely of this moment.
+        </p>
+        <div style="margin-top:3rem" class="reveal reveal-delay-4">
+          <a href="#projects" style="display:inline-flex;align-items:center;gap:1.5rem;text-decoration:none;color:var(--gold);font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;border-bottom:0.5px solid rgba(201,169,110,0.3);padding-bottom:0.8rem;transition:all 0.3s">
+            View Selected Works
+            <span style="display:inline-block;width:30px;height:0.5px;background:var(--gold)"></span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="geo-divider"></div>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section id="projects">
+  <div class="section-pad">
+
+    <div class="projects-header">
+      <div>
+        <p class="eyebrow reveal">Selected Works</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          The <em>Portfolio</em>
+        </h2>
+      </div>
+      <a href="#" style="display:inline-flex;align-items:center;gap:1rem;text-decoration:none;color:var(--warm-gray-lt);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;transition:color 0.3s;align-self:flex-end;padding-bottom:0.5rem">
+        All Projects
+        <span style="display:inline-block;width:20px;height:0.5px;background:currentColor"></span>
+      </a>
+    </div>
+
+    <div class="projects-grid reveal">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-inner">
+            <svg width="100%" height="100%" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.12">
+              <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+                <rect x="100" y="50" width="400" height="240" rx="0"/>
+                <rect x="120" y="70" width="360" height="200" rx="0"/>
+                <line x1="100" y1="50" x2="500" y2="290"/>
+                <line x1="500" y1="50" x2="100" y2="290"/>
+                <circle cx="300" cy="170" r="80"/>
+                <circle cx="300" cy="170" r="50"/>
+              </g>
+            </svg>
+            <span class="project-geo-label">निवास</span>
+          </div>
+          <div class="project-overlay">
+            <div class="project-info">
+              <p class="project-type">Luxury Residence</p>
+              <p class="project-name">Vyas Residence, Pune</p>
+              <p class="project-meta">7,200 sq.ft &ensp;·&ensp; 2023</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-base">
+          <span class="project-index">01</span>
+          <span class="project-title-base">Vyas Residence</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-inner">
+            <span class="project-geo-label">मंदिर</span>
+          </div>
+          <div class="project-overlay">
+            <div class="project-info">
+              <p class="project-type">Heritage Hotel</p>
+              <p class="project-name">Haveli Aurangabad</p>
+              <p class="project-meta">22,000 sq.ft &ensp;·&ensp; 2022</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-base">
+          <span class="project-index">02</span>
+          <span class="project-title-base">Haveli Aurangabad</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-inner">
+            <span class="project-geo-label">वाटिका</span>
+          </div>
+          <div class="project-overlay">
+            <div class="project-info">
+              <p class="project-type">Corporate Campus</p>
+              <p class="project-name">Krida Park, Nashik</p>
+              <p class="project-meta">15,000 sq.ft &ensp;·&ensp; 2023</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-base">
+          <span class="project-index">03</span>
+          <span class="project-title-base">Krida Park</span>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-inner">
+            <span class="project-geo-label">सभा</span>
+          </div>
+          <div class="project-overlay">
+            <div class="project-info">
+              <p class="project-type">Cultural Centre</p>
+              <p class="project-name">Natya Mandal, Mumbai</p>
+              <p class="project-meta">8,500 sq.ft &ensp;·&ensp; 2024</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-base">
+          <span class="project-index">04</span>
+          <span class="project-title-base">Natya Mandal</span>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-inner">
+            <span class="project-geo-label">आश्रम</span>
+          </div>
+          <div class="project-overlay">
+            <div class="project-info">
+              <p class="project-type">Wellness Retreat</p>
+              <p class="project-name">Shanti Aashram, Lonavala</p>
+              <p class="project-meta">12,000 sq.ft &ensp;·&ensp; 2024</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-base">
+          <span class="project-index">05</span>
+          <span class="project-title-base">Shanti Aashram</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="geo-divider" style="background:linear-gradient(to right,transparent,rgba(201,169,110,0.15),rgba(201,169,110,0.4),rgba(201,169,110,0.15),transparent)"></div>
+
+<!-- ══════════ PHILOSOPHY ══════════ -->
+<section id="philosophy">
+  <!-- Sacred geometry -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.05;display:flex;align-items:center;justify-content:flex-end">
+    <svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+        <circle cx="300" cy="300" r="280"/>
+        <circle cx="300" cy="300" r="220"/>
+        <circle cx="300" cy="300" r="160"/>
+        <circle cx="300" cy="300" r="100"/>
+        <circle cx="300" cy="300" r="40"/>
+        <g transform="rotate(0 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+        <g transform="rotate(30 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+        <g transform="rotate(60 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+        <g transform="rotate(90 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+        <g transform="rotate(120 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+        <g transform="rotate(150 300 300)"><line x1="300" y1="20" x2="300" y2="580"/></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="section-pad">
+    <div class="philosophy-inner">
+      <div>
+        <p class="eyebrow reveal">Our Belief</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          The <em>Philosophy</em><br>of Space
+        </h2>
+        <div class="gold-rule reveal reveal-delay-2"></div>
+        <blockquote class="philosophy-quote reveal reveal-delay-2">
+          "Every space we create is a<br>geometry of intention — drawn<br>first in silence, then in stone."
+        </blockquote>
+        <p class="body-text reveal reveal-delay-3" style="margin-top:2.5rem">
+          We believe architecture is not merely built — it is remembered. Spaces should carry the
+          intelligence of ancient proportion systems, the warmth of handcrafted material, and the
+          restraint of a practiced eye.
+        </p>
+      </div>
+
+      <div>
+        <div class="philosophy-pillars">
+          <div class="pillar reveal reveal-delay-1">
+            <p class="pillar-name">Vastu</p>
+            <p class="pillar-desc">Spatial orientation rooted in the cardinal geometry of the cosmos — every threshold, every axis, every opening informed by ancient science.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-2">
+            <p class="pillar-name">Shilpa</p>
+            <p class="pillar-desc">The artisan tradition of Indian craftsmanship — stone, wood, metal — worked with hands that understand time as a building material.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-3">
+            <p class="pillar-name">Mandala</p>
+            <p class="pillar-desc">The sacred plan. Architecture conceived as a mandala — from the centre outward, from the sacred inward, always in conversation with the infinite.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-4">
+            <p class="pillar-name">Akasha</p>
+            <p class="pillar-desc">Space as the fifth element. The negative spaces, courtyards, and voids are designed with as much intention as the walls that define them.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-1">
+            <p class="pillar-name">Kala</p>
+            <p class="pillar-desc">The art of timing. We understand light as it moves through a building across seasons, designing shadows that are as considered as the structure itself.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-2">
+            <p class="pillar-name">Dhvani</p>
+            <p class="pillar-desc">The resonance of material. Stone sings differently from timber. Brass from terracotta. We compose spaces the way a musician composes sound.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MATERIALS ══════════ -->
+<section id="materials">
+  <div class="section-pad-sm">
+    <p class="eyebrow reveal">Material Palette</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      The <em>Elemental</em><br>Vocabulary
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="max-width:500px">
+      We work with materials that carry geological memory — stones quarried from the same earth
+      that built India's great temples and stepwells.
+    </p>
+  </div>
+
+  <div class="materials-strip reveal">
+    <div class="material-swatch">
+      <div class="swatch-bg swatch-1"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">Kota Stone</span>
+        <span class="swatch-origin">Rajasthan, India</span>
+      </div>
+    </div>
+    <div class="material-swatch">
+      <div class="swatch-bg swatch-2"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">Teak &amp; Rosewood</span>
+        <span class="swatch-origin">Western Ghats</span>
+      </div>
+    </div>
+    <div class="material-swatch">
+      <div class="swatch-bg swatch-3"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">Fossil Stone</span>
+        <span class="swatch-origin">Kutch, Gujarat</span>
+      </div>
+    </div>
+    <div class="material-swatch">
+      <div class="swatch-bg swatch-4"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">Brass &amp; Copper</span>
+        <span class="swatch-origin">Moradabad Craft</span>
+      </div>
+    </div>
+    <div class="material-swatch">
+      <div class="swatch-bg swatch-5"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">Lime Plaster</span>
+        <span class="swatch-origin">Rajputana Technique</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="geo-divider"></div>
+
+<!-- ══════════ PROCESS ══════════ -->
+<section id="process">
+  <div class="section-pad">
+    <p class="eyebrow reveal">The Method</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Five <em>Stages</em><br>of Creation
+    </h2>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-number">01</div>
+        <div class="step-title">Shravana</div>
+        <div class="step-desc">Deep listening. Before any line is drawn, we spend time understanding how a client inhabits space — their rituals, rhythms, and the silences between.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-number">02</div>
+        <div class="step-title">Chintan</div>
+        <div class="step-desc">Contemplation. We move through site at different hours of the day, different seasons of the year, mapping light, wind, and the land's own geometry.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-number">03</div>
+        <div class="step-title">Rachana</div>
+        <div class="step-desc">Creation. From initial mandala sketches to technical precision — every drawing is a conversation between the sacred and the structural.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-number">04</div>
+        <div class="step-title">Nirman</div>
+        <div class="step-desc">Construction. We work directly with master craftsmen — stone carvers, metal smiths, lime plasterers — who carry living traditions in their hands.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-number">05</div>
+        <div class="step-title">Samarpan</div>
+        <div class="step-desc">Offering. The handover of space is ceremonial. We present not just a building, but a complete sensory world — curated down to the last threshold detail.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section id="testimonials">
+  <div class="section-pad">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      What <em>Clients</em> Say
+    </h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <p class="testimonial-text">
+          They designed our family home the way an ancient architect would have — beginning with
+          the sun, the seasons, and the sacred. The proportions feel inevitable, as if the house
+          has always been there.
+        </p>
+        <p class="testimonial-author">Suresh Vyas</p>
+        <p class="testimonial-role">Industrialist &amp; Patron &ensp;·&ensp; Pune</p>
+      </div>
+      <div class="testimonial reveal reveal-delay-1">
+        <p class="testimonial-text">
+          Working with Shrivats was unlike any design experience we had known. They brought
+          something rare — a genuine reverence for Indian craftsmanship combined with the
+          rigor of world-class architecture.
+        </p>
+        <p class="testimonial-author">Meera Chandrasekhar</p>
+        <p class="testimonial-role">Cultural Foundation Director &ensp;·&ensp; Mumbai</p>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <p class="testimonial-text">
+          Our hotel now feels like a place out of time — guests describe entering it as stepping
+          into something that feels both entirely new and deeply remembered. That is their gift.
+        </p>
+        <p class="testimonial-author">Rajiv Patwardhan</p>
+        <p class="testimonial-role">Heritage Hospitality Group &ensp;·&ensp; Aurangabad</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <!-- Geo background -->
+  <div style="position:absolute;right:-200px;top:50%;transform:translateY(-50%);opacity:0.04;pointer-events:none">
+    <svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#e8d5be" stroke-width="0.5" fill="none">
+        <rect x="100" y="100" width="400" height="400" transform="rotate(0 300 300)"/>
+        <rect x="100" y="100" width="400" height="400" transform="rotate(45 300 300)"/>
+        <rect x="130" y="130" width="340" height="340" transform="rotate(0 300 300)"/>
+        <rect x="130" y="130" width="340" height="340" transform="rotate(45 300 300)"/>
+        <rect x="160" y="160" width="280" height="280" transform="rotate(0 300 300)"/>
+        <rect x="160" y="160" width="280" height="280" transform="rotate(45 300 300)"/>
+        <circle cx="300" cy="300" r="200"/>
+        <circle cx="300" cy="300" r="150"/>
+        <circle cx="300" cy="300" r="100"/>
+        <circle cx="300" cy="300" r="50"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="section-pad">
+    <div class="contact-inner">
+      <div>
+        <p class="eyebrow reveal">Begin</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          Commission<br><em>a Space</em>
+        </h2>
+        <p class="body-text reveal reveal-delay-2" style="max-width:400px">
+          We take a limited number of commissions each year. Tell us about your vision —
+          the land, the light, the life you imagine within it.
+        </p>
+
+        <div class="contact-form reveal reveal-delay-3">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="Your name">
+            </div>
+            <div class="form-field">
+              <label class="form-label">City</label>
+              <input type="text" class="form-input" placeholder="City of project">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Project Type</label>
+            <select class="form-select">
+              <option style="background:#1a1814">Select project type</option>
+              <option style="background:#1a1814">Luxury Residence</option>
+              <option style="background:#1a1814">Heritage Restoration</option>
+              <option style="background:#1a1814">Hospitality &amp; Hotel</option>
+              <option style="background:#1a1814">Cultural Institution</option>
+              <option style="background:#1a1814">Luxury Interiors</option>
+              <option style="background:#1a1814">Commercial Space</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Your Vision</label>
+            <textarea class="form-textarea" placeholder="Describe the space you are imagining..."></textarea>
+          </div>
+          <button class="btn-submit">
+            Send Enquiry
+            <span class="arrow"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <h3>Find the Studio</h3>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Studio Address</p>
+          <p class="contact-detail-value">12, Lane of Craftsmen, Model Colony<br>Pune, Maharashtra — 411 016</p>
+        </div>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Email</p>
+          <p class="contact-detail-value">commissions@shrivatsstudio.in</p>
+        </div>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Studio Hours</p>
+          <p class="contact-detail-value">Mon — Fri &ensp;·&ensp; 10:00 — 18:00 IST</p>
+        </div>
+
+        <div class="contact-detail">
+          <p class="contact-detail-label">Project Inquiries</p>
+          <p class="contact-detail-value">+91 20 2553 4400</p>
+        </div>
+
+        <!-- Small geo ornament -->
+        <div style="margin-top:4rem;opacity:0.2">
+          <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#c9a96e" stroke-width="0.5" fill="none">
+              <rect x="20" y="20" width="80" height="80" transform="rotate(0 60 60)"/>
+              <rect x="20" y="20" width="80" height="80" transform="rotate(45 60 60)"/>
+              <rect x="30" y="30" width="60" height="60" transform="rotate(0 60 60)"/>
+              <rect x="30" y="30" width="60" height="60" transform="rotate(45 60 60)"/>
+              <circle cx="60" cy="60" r="35"/>
+              <circle cx="60" cy="60" r="20"/>
+              <circle cx="60" cy="60" r="5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">श्रिवत्स</div>
+    <div class="footer-mantra">
+      ॥ कल्पयतु, विश्वालं कुरु, साधयतु ॥
+    </div>
+    <div class="footer-copy">
+      © 2024 Shrivats Studio<br>
+      Architecture &amp; Interior Design, Pune
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Custom cursor ──
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .project-card, .material-swatch').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+});
+
+// ── Scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// ── Nav scroll behaviour ──
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) {
+    nav.style.background = 'rgba(26,24,20,0.97)';
+    nav.style.backdropFilter = 'blur(8px)';
+  } else {
+    nav.style.background = 'linear-gradient(to bottom, rgba(26,24,20,0.95) 0%, transparent 100%)';
+    nav.style.backdropFilter = 'none';
+  }
+});
+
+// ── Parallax hero geo ──
+const heroGeo = document.querySelector('.hero-geo');
+const heroGeo2 = document.querySelector('.hero-geo-2');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (heroGeo) heroGeo.style.transform = `translateY(${y * 0.15}px)`;
+  if (heroGeo2) heroGeo2.style.transform = `translateY(${y * 0.08}px) rotate(${y * 0.02}deg)`;
+});
+</script>
+</body>
+</html>

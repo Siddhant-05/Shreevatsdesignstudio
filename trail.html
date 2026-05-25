@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Pattern</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #020202;
+      font-family: Arial, sans-serif;
+    }
+
+    .badge {
+      width: min(86vw, 620px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 55% 45%, #0785a3, #045c71);
+      border: 7px solid #25292b;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      animation: circleFill 1.2s ease-out forwards;
+      transform: scale(0.94);
+      opacity: 0;
+    }
+
+    svg {
+      width: 74%;
+      height: 74%;
+      overflow: visible;
+    }
+
+    .pattern {
+      fill: none;
+      stroke: #8fa7ad;
+      stroke-width: 13;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+      animation: drawPattern 4s ease-in-out forwards;
+      animation-delay: 0.6s;
+    }
+
+    .inner {
+      animation-delay: 1s;
+    }
+
+    @keyframes circleFill {
+      from {
+        opacity: 0;
+        transform: scale(0.65);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes drawPattern {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="badge">
+    <svg viewBox="0 0 600 600" aria-label="Animated geometric pattern">
+      <!-- Main interwoven diamond pattern -->
+      <path
+        class="pattern"
+        d="
+          M300 35 L405 140 L300 245 L195 140 Z
+
+          M195 140 L300 245
+          M405 140 L300 245
+
+          M300 155 L360 215 L300 275 L240 215 Z
+
+          M95 250 L200 145 L305 250 L200 355 Z
+          M495 250 L390 145 L285 250 L390 355 Z
+
+          M95 350 L200 245 L305 350 L200 455 Z
+          M495 350 L390 245 L285 350 L390 455 Z
+
+          M300 565 L195 460 L300 355 L405 460 Z
+
+          M195 460 L300 355
+          M405 460 L300 355
+        "
+      />
+
+      <!-- Smaller internal diamonds -->
+      <path
+        class="pattern inner"
+        d="
+          M300 95 L350 145 L300 195 L250 145 Z
+
+          M95 250 L150 195 L205 250 L150 305 Z
+          M495 250 L440 195 L385 250 L440 305 Z
+
+          M95 350 L150 295 L205 350 L150 405 Z
+          M495 350 L440 295 L385 350 L440 405 Z
+
+          M300 405 L350 455 L300 505 L250 455 Z
+
+          M245 250 L300 195 L355 250 L300 305 Z
+          M245 350 L300 295 L355 350 L300 405 Z
+        "
+      />
+    </svg>
+  </div>
+</body>
+</html>
