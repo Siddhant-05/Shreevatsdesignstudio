@@ -1395,6 +1395,26 @@ footer {
   height: 100px;
 }
 
+.web-developer {
+  position: static;
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--bg-teal-wash);
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+
+}
+.web-developer a{
+  color: inherit;
+  text-decoration: none;
+}
+.web-developer:hover {
+  opacity: 1;
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */
